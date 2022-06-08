@@ -15,6 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'preservim/vim-markdown'
 Plugin 'dense-analysis/ale'
+Plugin 'JuanDAC/betty-ale-vim'
 
 
 " All of your Plugins must be added before the following line
@@ -61,7 +62,7 @@ if has_key(shells,extension)
 	let fileshell = shells[extension]
 
 	if a:portable
-		let line =  "#!/usr/bin/env " . fileshell
+		let line =  "#!/bin/" . fileshell
 	else
 		let line = "#! " . system("which " . fileshell)
 	endif
@@ -83,3 +84,5 @@ endfunction
 
 :autocmd BufNewFile *.* :call Hashbang(1,1,1)
 
+"Add betty to ale linters
+let g:ale_linters = {'c': ['betty-style', 'betty-doc'] }
